@@ -2,6 +2,16 @@
 #include<locale.h>
 #include<stdlib.h>
 #include<math.h>
+#include <cstring>
+
+struct Item {
+    int id;
+    char description[20];
+
+    Item(int i, const char* d) : id(i) {
+        strcpy(description, d);
+    }
+};
 
 void printInvalidOption() {
 	system("cls");
@@ -9,104 +19,25 @@ void printInvalidOption() {
 	return;
 }
 
-int selectItem() {
-	int selection = 0;
-	
-	do {
-		printf("Escolha o item perdido na enchente\n\n");
-		printf("1 - Carro\n");
-		printf("2 - Geladeira\n");
-		printf("3 - Freezer\n");
-		printf("4 - Fogão\n");
-		printf("5 - Máquina de lavar\n");
-		printf("6 - Televisão\n");
-		printf("7 - Computador\n");
-		printf("8 - Video game\n");
-		printf("9 - Celular\n");
-		printf("10 - Cama\n");
-		printf("11 - Guarda roupa\n");
-		printf("12 - Mesa\n");;
-		scanf("%d", &selection);
-		
-		if(selection < 1 || selection > 12){
-			printInvalidOption();
-		}
-		
-	} while (selection < 1 || selection > 12);
+int main() {
+    setlocale(LC_ALL, "");
 
-	return selection;	
-}
+	Item items[10] = {
+	        Item(1, "Carro"),
+	        Item(2, "Geladeira"),
+	        Item(3, "Fogão"),
+	        Item(4, "Máquina de lavar"),
+	        Item(5, "Televisão"),
+	        Item(6, "Computador"),
+	        Item(7, "Video game"),
+	        Item(8, "Celular"),
+	        Item(9, "Cama"),
+	        Item(10, "Guarda roupa")
+	};
+    
+  	for(int i = 0; i < sizeof(items) / sizeof(items[0]); i++){
+  		printf("1");
+	  }
 
-const char* getItemById(int id){
-	
-	switch(id){
-		case 1:
-			return "Carro";
-			break;
-		case 2:
-			return "Geladeira";
-			break;
-		case 3:
-			return "Freezer";
-			break;
-		case 4:
-			return "Fogão";
-			break;
-		case 5:
-			return "Máquina de lavar";
-			break;
-		case 6:
-			return "Televisão";
-			break;
-		case 7:
-			return "Computador";
-			break;
-		case 8:
-			return "Video game";
-			break;
-		case 9:
-			return "Celular";
-			break;
-		case 10:
-			return "Cama";
-			break;
-		case 11:
-			return "Guarda roupa";
-			break;
-		case 12:
-			return "Mesa";
-			break;
-	}
-}
-
-int setQuantityOfItem(int itemId) {
-	int quantity = 0;
-	
-	do {
-		printf("Qual quantidade de %s você perdeu? ", getItemById(itemId));
-		scanf("%d", &quantity);
-		
-		if(quantity < 0){
-			printInvalidOption();
-		}
-	} while (quantity < 0);
-	
-	return quantity;
-}
-
-int main(void){
-	setlocale(LC_ALL, "");
-	
-	char name[30];
-
-	printf("Informe seu nome: ");
-	gets(name);
-	
-	printf("%s", getItemById(2));
-	
-	setQuantityOfItem(3);
-	
-	
-	
-	return 0;
+    return 0;
 }
